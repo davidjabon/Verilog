@@ -22,13 +22,19 @@
 
 module pwm_tb();
     reg clk;
+    reg enable;
     wire out;
    
-pwm  #(.CLK_PERIOD(20)) uut (.clk(clk),.enable(1'b1),.pwm_period(13),.out(out));
+pwm  #(.CLK_PERIOD(20)) uut (.clk(clk),.enable(enable),.pwm_period(13),.out(out));
 
 initial
     begin
-        clk=1'b0;
+        clk=1'b1;
+        enable = 1'b0;
+        #100;
+        enable =1'b1;
+        #500;
+        enable = 1'b0;
     end
     
 always #10 clk = ~clk;   

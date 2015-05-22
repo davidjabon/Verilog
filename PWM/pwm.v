@@ -15,8 +15,9 @@
 // 
 // Revision:
 // Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Additional Comments:  Enable signal is assumed to synchronous; if enable transitions low during pwm pulse,
+//                       pulse will gracefully complete
+//
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -56,7 +57,16 @@ begin
      end   //end if(enable)
    else
      begin
-      clk_out =1'b0;
+        if ((counter > 0) && (counter < pwm_period) )   //gracefully end the last pwm if it has begun
+           begin
+              clk_out <= 1'b1;
+              counter <= counter + 32'b1;
+           end
+        else
+           begin
+             clk_out <= 1'b0;
+             counter <= 32'b0;
+           end
      end 
    
 end 
