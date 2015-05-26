@@ -22,7 +22,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 module seven_segment_leds_x_4(
     input [15:0] bcd_in,
-	 input [3:0] decimal_points,
+    input [3:0] decimal_points,
     input clk,
     output  reg [6:0] a_to_g,
     output reg decimal_point,
@@ -39,10 +39,10 @@ assign counter = clkdiv[19:18];   //count every 2.6 ms  (with 100 MHz clock)
 //quad 4 to 1 MUX
 always @(posedge clk)
     case(counter)
-	    0: {digit, decimal_point} = {bcd_in[3:0], decimal_points[0]};
-		 1: {digit, decimal_point} = {bcd_in[7:4], decimal_points[1]};
-       2: {digit, decimal_point} = {bcd_in[11:8], decimal_points[2]};
-		 3: {digit, decimal_point} = {bcd_in[15:12], decimal_points[3]};
+	0: {digit, decimal_point} = {bcd_in[3:0], decimal_points[0]};
+	1: {digit, decimal_point} = {bcd_in[7:4], decimal_points[1]};
+	2: {digit, decimal_point} = {bcd_in[11:8], decimal_points[2]};
+	3: {digit, decimal_point} = {bcd_in[15:12], decimal_points[3]};
      endcase
 
 //7-segment decoder 
@@ -64,17 +64,17 @@ always @(posedge clk)
 //digit selector
 always @(posedge clk)
     case(counter)
-	   0: anode = 4'b1110;
-		1: anode = 4'b1101;
-		2: anode = 4'b1011;
-		3: anode = 4'b0111;
-		default: anode = 4'b1111;  //all blank
+    	0: anode = 4'b1110;
+	1: anode = 4'b1101;
+	2: anode = 4'b1011;
+	3: anode = 4'b0111;
+	default: anode = 4'b1111;  //all blank
      endcase
      
 //clock divider 
 always  @ (posedge clk)
    begin
-	   clkdiv <= clkdiv + 20'b1;
-	end 
+	lkdiv <= clkdiv + 20'b1;
+    end 
 	  
 endmodule
