@@ -17,7 +17,7 @@
 // Revision 0.01 - File Created
 // Additional Comments:   Note that the segments are a_to_g with a in position 6, b in position 5 etc
 //                        The ucf should label cathode a to be seg[6], cathode b to be seg[5], etc.
-//								  Note: to turn off decimal point set the corresponding bit high.
+//			  Note: to turn off decimal point set the corresponding bit high.
 //
 //////////////////////////////////////////////////////////////////////////////////
 module seven_segment_leds_x_4(
@@ -74,7 +74,7 @@ always @(posedge clk)
 //clock divider 
 always  @ (posedge clk)
    begin
-	lkdiv <= clkdiv + 20'b1;
+	clkdiv <= clkdiv + 20'b1;
     end 
 	  
 endmodule
