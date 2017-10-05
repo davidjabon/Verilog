@@ -28,10 +28,6 @@ module Toggle_Register(
     output q
     );
 
-    
-
-    
 dff_sync_reset dff(.clk(clk),.reset(reset),.d(t ^ q), .q(q));
-
 
 endmodule
